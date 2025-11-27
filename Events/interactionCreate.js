@@ -500,7 +500,7 @@ interaction.client.detectDecksData.set(message.id, {
           const data = interaction.client.detectDecksData.get(message.id);
           if (!data) {
             return await i.reply({ 
-              content: "Data not found. Please try running the command again.", 
+              content: "Data not found. Please try reclicking the button or resending command. Please try running the command again.", 
               flags: MessageFlags.Ephemeral 
             });
           }
@@ -672,7 +672,7 @@ if (!interaction.client.deckbuilderData) {
   
   if (!data) {
     return await interaction.reply({
-      content: "Data not found. Please try running the command again.",
+      content: "Data not found. Please try reclicking the button or resending command. Please try running the command again.",
       flags: MessageFlags.Ephemeral
     });
   }
@@ -744,7 +744,7 @@ if (!interaction.client.deckbuilderData) {
       const collectorData = interaction.client.deckbuilderData.get(i.message.id);
       if (!collectorData) {
         return await i.reply({
-          content: "Data not found.",
+          content: "Data not found. Please try reclicking the button or resending command.",
           flags: MessageFlags.Ephemeral
         });
       }
@@ -872,7 +872,7 @@ else if (interaction.customId.startsWith("herocat_")) {
   
   if (!data) {
     return await interaction.reply({
-      content: "Data not found. Please try running the command again.",
+      content: "Data not found. Please try reclicking the button or resending command. Please try running the command again.",
       flags: MessageFlags.Ephemeral
     });
   }
@@ -941,7 +941,7 @@ else if (interaction.customId.startsWith("herocat_")) {
       const collectorData = interaction.client.heroHelpData.get(i.message.id);
       if (!collectorData) {
         return await i.reply({
-          content: "Data not found.",
+          content: "Data not found. Please try reclicking the button or resending command.",
           flags: MessageFlags.Ephemeral
         });
       }
@@ -1113,7 +1113,7 @@ else if (interaction.customId.startsWith("herohelp_")) {
 
     if (!heroName || !deckTable) {
       return await interaction.reply({
-        content: "Hero data not found.",
+        content: "Hero Data not found. Please try reclicking the button or resending command.",
         flags: MessageFlags.Ephemeral
       });
     }
@@ -1122,7 +1122,7 @@ else if (interaction.customId.startsWith("herohelp_")) {
     const [heroRows] = await db.query("SELECT * FROM herocommands WHERE heroname = ?", [heroName]);
     if (!heroRows || heroRows.length === 0) {
       return await interaction.reply({
-        content: "Hero data not found in database.",
+        content: "Hero Data not found. Please try reclicking the button or resending command in database.",
         flags: MessageFlags.Ephemeral
       });
     }
@@ -1280,7 +1280,7 @@ else if (interaction.customId.startsWith("herodeck_")) {
   
   if (!data) {
     return await interaction.reply({
-      content: "Data not found. Please try running the command again.",
+      content: "Data not found. Please try reclicking the button or resending command. Please try running the command again.",
       flags: MessageFlags.Ephemeral
     });
   }
@@ -1348,7 +1348,7 @@ else if (interaction.customId.startsWith("herodknav_")) {
   const data = interaction.client.heroDecksData.get(interaction.message.id);
   if (!data) {
     return await interaction.reply({
-      content: "Data not found.",
+      content: "Data not found. Please try reclicking the button or resending command.",
       flags: MessageFlags.Ephemeral
     });
   }
@@ -1434,7 +1434,7 @@ else if (interaction.customId.startsWith("herodklist_")) {
   
   if (!data) {
     return await interaction.reply({
-      content: "Data not found.",
+      content: "Data not found. Please try reclicking the button or resending command.",
       flags: MessageFlags.Ephemeral
     });
   }

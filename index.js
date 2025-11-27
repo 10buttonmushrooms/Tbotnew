@@ -8,14 +8,10 @@ Author: Tbone Gaming
 const { token, user, host, password, database } = require("./config.json");
 const scanAllTablesAndSync = require("./Utilities/scanAllTablesAndSync");
 const mysql = require(`mysql2`);
-const { PermissionsBitField } = require("discord.js");
 const {
   Client,
   Partials,
-  ChannelType,
-  EmbedBuilder,
   Collection,
-  Events,
   GatewayIntentBits,
 } = require("discord.js");
 const client = new Client({
@@ -37,7 +33,6 @@ const db = mysql
   })
   .promise();
   module.exports = db;
-const prefix = "?";
 client.commands = new Collection();
 client.aliases = new Collection();
 client.slashCommands = new Collection();
@@ -97,59 +92,6 @@ for (const file of eventFiles) {
   const event = require(filePath);
   client.on(event.name, event.run);
 }
-client.on(Events.MessageCreate, async (message) => {
-  if (message.content.toLowerCase().startsWith(prefix)) {
-    if (message.author.bot && message.author.id != "1043528908148052089") return;
-    const channel = client.channels.cache.get("1050107020008771604");
-    const args = message.content.slice(prefix.length).trim().split(/ +/g);
-    const invokedRaw = args.join("").toLowerCase();
-    const invoked = invokedRaw.replaceAll(/[^a-z0-9]+/g, ""); 
-    const command =
-      client.commands.get(invoked) ||
-      client.commands.find((a) => a.aliases?.includes(invoked));
-    if (!command && message.channel.id != "1050107020008771604")
-      return channel.send(
-        `${message} is not a command sent by ${message.author.username}.`
-      );
-    if (!command) {
-      return;
-    }
-    
-    // Check if the message is from a guild (not a DM)
-    if (message.guild) {
-      if (
-        !message.guild.members.me
-          .permissionsIn(message.channel)
-          .has(PermissionsBitField.Flags.SendMessages)
-      ) {
-        return channel.send(
-          `I do not have permission to send messages in this channel. ${message.guild.name}, ${message.channel.name}, <#${message.channel.id}>`
-        );
-      }
-    }
-    try {
-      await command.run(client, message, args);
-    } catch (e) {
-      const errEmbed = new EmbedBuilder()
-        .setTitle("❌ | Error")
-        .setColor("Red")
-        .setDescription(
-          `An error occured while running the command.\n\`\`\`ansi\n${e}\`\`\``
-        );
-      console.error(e);
-      message.channel.send({ embeds: [errEmbed] });
-    }
-    //DM Commands
-    if (message.channel.type === ChannelType.DM) {
-      return;
-    }
-  }
-});
-client.on(Events.Debug, (stdout) => {
-  if (stdout.startsWith("Hit a 429")) {
-    console.log("Rate limit reached. Retrying after some time...");
-  }
-});
 client.login(token);
 
 const dbTables = [
@@ -193,7 +135,7 @@ const dbTables = [
   {table: "crazytricks", prefix: "crt", category: "Tricks Phase" },
   { table: "heartycards", prefix: "hc", category: "Zombie Cards"},
   {table: "heartytricks", prefix: "ht", category: "Tricks Phase" },
-  { table: "sneakycards", prefix: "snc", category: "Zombie Cards"},
+  {table: "sneakycards", prefix: "snc", category: "Zombie Cards"},
   {table: "sneakytricks", prefix: "snt", category: "Tricks Phase" },
   {table: "deckbuilders", prefix: "db", category: "DeckBuilders" },
   {table: "helpcommands", prefix: "help", category: "Miscellaneous" }, 

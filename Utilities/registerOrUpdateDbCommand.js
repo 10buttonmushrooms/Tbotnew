@@ -48,11 +48,7 @@ async function registerOrUpdateDbCommand(tableConfig, row, client, dbCommandMap,
     aliasSet.add(a);
   }
   const aliasesArray = Array.from(aliasSet);
-
-  // Determine which embed to use based on row content
   let embed;
-
-  // create command module shape compatible with other commands
   const commandModule = {
     name: cmdName,
     aliases: aliasesArray,
@@ -231,7 +227,9 @@ const [decks] = await db.query(`SELECT * FROM ${deckTable}`);
     .setStyle(ButtonStyle.Secondary)
   );
     components.push(actionRow);
+    console.log(`[DB Command] Sending card with button for: ${row.card_name}`);
     await message.channel.send({ embeds: [embed], components });
+    console.log(`[DB Command] Message sent successfully`);
   } else if(row.stats && !row.button){
   embed = buildCardEmbedFromRow(row, tableConfig.table, dbTableColors);
   const detectDecks = new ButtonBuilder()

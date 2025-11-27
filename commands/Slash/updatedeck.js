@@ -198,17 +198,17 @@ module.exports = {
         UNION ALL
         SELECT name FROM bcdecks WHERE LOWER(REPLACE(name, ' ', '')) = ?
       `;
-      var [rows] = await db.query(query, [name.toLowerCase().replaceAll(/\s+/g, ""), name.toLowerCase().replaceAll(/\s+/g, "")]);
+       [rows] = await db.query(query, [name.toLowerCase().replaceAll(/\s+/g, ""), name.toLowerCase().replaceAll(/\s+/g, "")]);
     } 
     // check for hg/SB
     else if (heroId === "1100170925208502282") {
       query = `SELECT name FROM hgdecks WHERE LOWER(REPLACE(name, ' ', '')) = ?
         UNION ALL
         SELECT name FROM sbdecks WHERE LOWER(REPLACE(name, ' ', '')) = ?`;
-      var [rows] = await db.query(query, [name.toLowerCase().replaceAll(/\s+/g, ""), name.toLowerCase().replaceAll(/\s+/g, "")]);
+      [rows] = await db.query(query, [name.toLowerCase().replaceAll(/\s+/g, ""), name.toLowerCase().replaceAll(/\s+/g, "")]);
     }
     else {
-      var [rows] = await db.query(`SELECT name FROM ${tableName} WHERE LOWER(REPLACE(name, ' ', '')) = ?`, [name.toLowerCase().replaceAll(/\s+/g, "")]);
+     [rows] = await db.query(`SELECT name FROM ${tableName} WHERE LOWER(REPLACE(name, ' ', '')) = ?`, [name.toLowerCase().replaceAll(/\s+/g, "")]);
     }
     
     if (rows.length === 0) {

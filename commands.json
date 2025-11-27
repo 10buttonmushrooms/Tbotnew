@@ -599,12 +599,11 @@
  [
   "gkdecks:1",
   {
-   "commandName": "tempoknuckles",
+   "commandName": "fertfather",
    "aliases": [
     "gkbudget",
     "bgk",
-    "budgetgk",
-    "fertfather"
+    "budgetgk"
    ]
   }
  ],
@@ -1598,7 +1597,7 @@
  [
   "guardiancards:22",
   {
-   "commandName": "platern",
+   "commandName": "plantern",
    "aliases": [
     "latern"
    ]
@@ -6509,7 +6508,9 @@
     "py",
     "chungusyeti",
     "primeval",
-    "pyeti"
+    "pyeti",
+    "primalyeti",
+    "primal-yeti"
    ]
   }
  ],
