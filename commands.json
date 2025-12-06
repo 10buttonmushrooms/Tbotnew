@@ -444,7 +444,8 @@
    "commandName": "logbait",
    "aliases": [
     "ccaggro",
-    "aggrocc"
+    "aggrocc",
+    "speed"
    ]
   }
  ],

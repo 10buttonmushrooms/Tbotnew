@@ -101,7 +101,7 @@ async function registerOrUpdateDbCommand(tableConfig, row, client, dbCommandMap,
     else if (row.heroname && row.herocommand) {
   try {
     const buildHelpHeroEmbed = require("./buildHelpHeroEmbed");
-    const heroCommand = row.herocommand;
+    const heroCommand = row.herocommand.toString().trim();
     const heroName = row.heroname;
     const heroTableMap = {
       'helpbc': 'bcdecks',
@@ -127,12 +127,7 @@ async function registerOrUpdateDbCommand(tableConfig, row, client, dbCommandMap,
       'helpsm': 'smdecks',
       'helpzm': 'zmdecks'
     };
-
     const deckTable = heroTableMap[heroCommand];
-    if (!deckTable) {
-      console.error(`No deck table found for hero command: ${heroCommand}`);
-      return;
-    }
     const db = require("../index.js");
 const [decks] = await db.query(`SELECT * FROM ${deckTable}`);
     
